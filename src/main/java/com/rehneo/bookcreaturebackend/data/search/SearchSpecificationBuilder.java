@@ -28,7 +28,7 @@ public class SearchSpecificationBuilder<T> {
     public Specification<T> build() {
         if (params.isEmpty()) return null;
 
-        Specification<T> result = new SearchSpecification<T>(params.get(0));
+        Specification<T> result = new SearchSpecification<>(params.get(0));
 
         for (int i = 1; i < params.size(); i++) {
             SearchCriteria criteria = params.get(i);

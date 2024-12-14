@@ -3,9 +3,9 @@ spring:
     name: book-creature-backend
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${DATABASE_HOST:pg}:${DATABASE_PORT:5432}/${DATABASE_NAME:studs}
-    username: ${DATABASE_USER:s368557}
-    password: ${DATABASE_PASSWORD:Jma5pssOiWg68HKQ}
+    url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/${DATABASE_NAME:creature-repository}
+    username: ${DATABASE_USER:postgres}
+    password: ${DATABASE_PASSWORD:password}
   jpa:
     hibernate:
       ddl-auto: validate
@@ -20,5 +20,5 @@ logging.level.org.springframework.web: DEBUG
 logging.level.org.hibernate: ERROR
 
 server:
-  port: ${server_port:11717}
+  port: ${server_port:8080}
 

@@ -17,33 +17,38 @@ public class SearchSpecification<T> implements Specification<T> {
             @Nullable CriteriaQuery<?> query,
             @NonNull CriteriaBuilder builder) {
         var value = criteria.getValue().toString().toLowerCase();
-        switch (criteria.getKey()){
-            case "location.id":
+        return switch (criteria.getKey()) {
+            case "location.id" -> {
                 Join<BookCreature, MagicCity> cityJoin = root.join("location");
-                return builder.like(
+                yield builder.like(
                         builder.lower(cityJoin.<Integer>get("id").as(String.class)),
                         "%" + value + "%");
-            case "ring.id":
+            }
+            case "ring.id" -> {
                 Join<BookCreature, Ring> ringJoin = root.join("ring");
-                return builder.like(builder.lower(ringJoin.<Integer>get("id").as(String.class)),"%" + value + "%");
-            case "coordinates.x":
+                yield builder.like(builder.lower(ringJoin.<Integer>get("id").as(String.class)), "%" + value + "%");
+            }
+            case "coordinates.x" -> {
                 Join<BookCreature, Coordinates> coordinatesJoinX = root.join("coordinates");
-                return builder.like(
+                yield builder.like(
                         builder.lower(coordinatesJoinX.<Float>get("x").as(String.class)),
                         "%" + value + "%");
-            case "coordinates.y":
+            }
+            case "coordinates.y" -> {
                 Join<BookCreature, Coordinates> coordinatesJoinY = root.join("coordinates");
-                return builder.like(
+                yield builder.like(
                         builder.lower(coordinatesJoinY.<Long>get("y").as(String.class)),
                         "%" + value + "%");
-            case "owner.username":
+            }
+            case "owner.username" -> {
                 Join<T, User> ownerJoin = root.join("owner");
-                return builder.like(builder.lower(ownerJoin.<String>get("username").as(String.class)), "%" + value + "%");
-            case "updatedBy.username":
+                yield builder.like(builder.lower(ownerJoin.<String>get("username").as(String.class)), "%" + value + "%");
+            }
+            case "updatedBy.username" -> {
                 Join<T, User> updatedJoin = root.join("updatedBy");
-                return builder.like(builder.lower(updatedJoin.<String>get("username").as(String.class)), "%" + value + "%");
-            default:
-                return builder.like(builder.lower(root.get(criteria.getKey()).as(String.class)), "%" + value + "%");
-        }
+                yield builder.like(builder.lower(updatedJoin.<String>get("username").as(String.class)), "%" + value + "%");
+            }
+            default -> builder.like(builder.lower(root.get(criteria.getKey()).as(String.class)), "%" + value + "%");
+        };
     }
 }

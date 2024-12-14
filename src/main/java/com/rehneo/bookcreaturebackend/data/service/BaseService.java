@@ -14,12 +14,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.io.Serializable;
 import java.time.ZonedDateTime;
-
-
-
 
 
 @AllArgsConstructor
@@ -32,7 +28,7 @@ public abstract class BaseService<
         TRepository extends BaseRepository<T,K>>{
     private final TRepository repository;
     private final TMapper mapper;
-    private final UserService userService;
+    protected UserService userService;
     private final SearchMapper<T> searchMapper;
 
     public TReadDto findById(K id) {
@@ -46,12 +42,13 @@ public abstract class BaseService<
     @Transactional
     public TReadDto create(TCreateDto createDto){
         T entity = mapper.map(createDto);
-        entity.setOwner(userService.getCurrentUser());
+        User user = userService.getCurrentUser();
+        entity.setOwner(user);
         entity.setCreatedAt(ZonedDateTime.now());
+        preSave(entity, user);
         repository.save(entity);
         return mapper.map(entity);
     }
-
 
     @Transactional
     public void delete(K id){
@@ -80,6 +77,7 @@ public abstract class BaseService<
             mapper.update(entity, createDto);
             entity.setUpdatedBy(userService.getCurrentUser());
             entity.setUpdatedAt(ZonedDateTime.now());
+            preSave(entity, user);
             repository.save(entity);
             return mapper.map(entity);
         }else{
@@ -106,5 +104,8 @@ public abstract class BaseService<
     public Page<TReadDto> findAllByOwner(Pageable pageable, int id){
         Page<T> entities = repository.findAllByOwnerId(pageable, id);
         return entities.map(mapper::map);
+    }
+
+    protected void preSave(T entity, User user) {
     }
 }

@@ -2,20 +2,20 @@ package com.rehneo.bookcreaturebackend.data.mapper;
 import com.rehneo.bookcreaturebackend.data.dto.create.MagicCityCreateDto;
 import com.rehneo.bookcreaturebackend.data.dto.read.MagicCityReadDto;
 import com.rehneo.bookcreaturebackend.data.entity.MagicCity;
-import com.rehneo.bookcreaturebackend.user.User;
 import com.rehneo.bookcreaturebackend.user.UserMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class MagicCityMapper extends BaseMapper<
         MagicCity,
         Integer,
         MagicCityReadDto,
         MagicCityCreateDto> {
 
-    private final UserMapper userMapper;
+    public MagicCityMapper(UserMapper userMapper) {
+        super(userMapper);
+    }
+
     @Override
     public MagicCity map(MagicCityCreateDto magicCityCreateDto) {
         MagicCity magicCity = MagicCity.builder()
@@ -32,8 +32,8 @@ public class MagicCityMapper extends BaseMapper<
     }
 
     @Override
-    public MagicCityReadDto map(MagicCity entity) {
-        MagicCityReadDto magicCity = MagicCityReadDto.builder()
+    protected MagicCityReadDto mapEntity(MagicCity entity) {
+        return MagicCityReadDto.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .area(entity.getArea())
@@ -43,15 +43,6 @@ public class MagicCityMapper extends BaseMapper<
                 .governor(entity.getGovernor())
                 .populationDensity(entity.getPopulationDensity())
                 .build();
-        magicCity.setOwner(userMapper.map(entity.getOwner()));
-        magicCity.setCreatedAt(entity.getCreatedAt());
-        magicCity.setUpdatedAt(entity.getUpdatedAt());
-        User user = entity.getUpdatedBy();
-        if(user != null){
-            magicCity.setUpdatedBy(userMapper.map(user));
-        }
-        magicCity.setEditable(entity.getEditable());
-        return magicCity;
     }
 
     @Override

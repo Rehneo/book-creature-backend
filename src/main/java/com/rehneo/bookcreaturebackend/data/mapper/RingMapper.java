@@ -2,16 +2,16 @@ package com.rehneo.bookcreaturebackend.data.mapper;
 import com.rehneo.bookcreaturebackend.data.dto.create.RingCreateDto;
 import com.rehneo.bookcreaturebackend.data.dto.read.RingReadDto;
 import com.rehneo.bookcreaturebackend.data.entity.Ring;
-import com.rehneo.bookcreaturebackend.user.User;
 import com.rehneo.bookcreaturebackend.user.UserMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
 @Service
-@RequiredArgsConstructor
 public class RingMapper extends BaseMapper<Ring, Long, RingReadDto, RingCreateDto> {
-    private final UserMapper userMapper;
+
+    public RingMapper(UserMapper userMapper) {
+        super(userMapper);
+    }
 
     @Override
     public Ring map(RingCreateDto ringCreateDto) {
@@ -23,21 +23,12 @@ public class RingMapper extends BaseMapper<Ring, Long, RingReadDto, RingCreateDt
         return ring;
     }
     @Override
-    public RingReadDto map(Ring entity) {
-        RingReadDto ring = RingReadDto.builder()
+    protected RingReadDto mapEntity(Ring entity) {
+        return RingReadDto.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .power(entity.getPower())
                 .build();
-        ring.setOwner(userMapper.map(entity.getOwner()));
-        ring.setCreatedAt(entity.getCreatedAt());
-        ring.setUpdatedAt(entity.getUpdatedAt());
-        User user = entity.getUpdatedBy();
-        if(user != null){
-            ring.setUpdatedBy(userMapper.map(user));
-        }
-        ring.setEditable(entity.getEditable());
-        return ring;
     }
 
     @Override

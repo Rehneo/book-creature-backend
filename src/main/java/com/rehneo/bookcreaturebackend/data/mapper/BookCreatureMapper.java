@@ -1,38 +1,42 @@
 package com.rehneo.bookcreaturebackend.data.mapper;
-
 import com.rehneo.bookcreaturebackend.data.dto.create.BookCreatureCreateDto;
 import com.rehneo.bookcreaturebackend.data.dto.read.BookCreatureReadDto;
 import com.rehneo.bookcreaturebackend.data.dto.read.CoordinatesReadDto;
 import com.rehneo.bookcreaturebackend.data.entity.BookCreature;
 import com.rehneo.bookcreaturebackend.data.entity.Coordinates;
 import com.rehneo.bookcreaturebackend.data.repository.CoordinatesRepository;
-import com.rehneo.bookcreaturebackend.error.AccessDeniedException;
 import com.rehneo.bookcreaturebackend.error.BadRequestException;
 import com.rehneo.bookcreaturebackend.data.repository.MagicCityRepository;
 import com.rehneo.bookcreaturebackend.data.repository.RingRepository;
-import com.rehneo.bookcreaturebackend.user.Role;
-import com.rehneo.bookcreaturebackend.user.User;
 import com.rehneo.bookcreaturebackend.user.UserMapper;
-import com.rehneo.bookcreaturebackend.user.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class BookCreatureMapper extends BaseMapper<
         BookCreature,
         Long,
         BookCreatureReadDto,
         BookCreatureCreateDto>{
 
-
-    private final UserMapper userMapper;
     private final MagicCityMapper magicCityMapper;
     private final MagicCityRepository magicCityRepository;
     private final CoordinatesRepository coordinatesRepository;
     private final RingRepository ringRepository;
     private final RingMapper ringMapper;
-    private final UserService userService;
+
+    public BookCreatureMapper(UserMapper userMapper,
+                              MagicCityMapper magicCityMapper,
+                              MagicCityRepository magicCityRepository,
+                              CoordinatesRepository coordinatesRepository,
+                              RingRepository ringRepository,
+                              RingMapper ringMapper) {
+        super(userMapper);
+        this.magicCityMapper = magicCityMapper;
+        this.magicCityRepository = magicCityRepository;
+        this.coordinatesRepository = coordinatesRepository;
+        this.ringRepository = ringRepository;
+        this.ringMapper = ringMapper;
+    }
 
     @Override
     public BookCreature map(BookCreatureCreateDto createDto) {
@@ -55,19 +59,13 @@ public class BookCreatureMapper extends BaseMapper<
                         () -> new BadRequestException("Ring with id: " + createDto.getRingId() + " not found")
                 ))
                 .build();
-        if(creature.getLocation().getOwner().getId() != userService.getCurrentUser().getId()){
-            throw new AccessDeniedException("not enough rights to use the Location with id: " + creature.getLocation().getId());
-        }
-        if(creature.getRing().getOwner().getId() != userService.getCurrentUser().getId()){
-            throw new AccessDeniedException("not enough rights to use the Ring with id: " + creature.getRing().getId());
-        }
         creature.setEditable(createDto.getEditable());
         return creature;
     }
 
     @Override
-    public BookCreatureReadDto map(BookCreature entity) {
-        BookCreatureReadDto bookCreature = BookCreatureReadDto.builder()
+    protected BookCreatureReadDto mapEntity(BookCreature entity) {
+        return BookCreatureReadDto.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .coordinates(CoordinatesReadDto.builder()
@@ -81,15 +79,6 @@ public class BookCreatureMapper extends BaseMapper<
                 .defenseLevel(entity.getDefenseLevel())
                 .ring(ringMapper.map(entity.getRing()))
                 .build();
-        bookCreature.setOwner(userMapper.map(entity.getOwner()));
-        bookCreature.setCreatedAt(entity.getCreatedAt());
-        bookCreature.setUpdatedAt(entity.getUpdatedAt());
-        User user = entity.getUpdatedBy();
-        if(user != null) {
-            bookCreature.setUpdatedBy(userMapper.map(user));
-        }
-        bookCreature.setEditable(entity.getEditable());
-        return bookCreature;
     }
 
     @Override
@@ -111,17 +100,5 @@ public class BookCreatureMapper extends BaseMapper<
         entity.setRing(ringRepository.findById(createDto.getRingId()).orElseThrow(
                 () -> new BadRequestException("Ring with id: " + createDto.getRingId() + " not found")
         ));
-        if(
-                entity.getLocation().getOwner().getId() != userService.getCurrentUser().getId() &&
-                userService.getCurrentUser().getRole() != Role.ADMIN
-        ){
-            throw new AccessDeniedException("not enough rights to use the Location with id: " + entity.getLocation().getId());
-        }
-        if(
-                entity.getRing().getOwner().getId() != userService.getCurrentUser().getId() &&
-                userService.getCurrentUser().getRole() != Role.ADMIN
-        ){
-            throw new AccessDeniedException("not enough rights to use the Ring with id: " + entity.getRing().getId());
-        }
     }
 }
