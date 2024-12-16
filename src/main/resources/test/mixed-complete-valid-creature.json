@@ -1,0 +1,48 @@
+[
+  {
+    "name": "Sam",
+    "coordinates": {
+      "y": 200
+    },
+    "age": 35,
+    "location": {
+      "name": "Shire",
+      "area": 4000,
+      "population": 1500,
+      "governor": "HOBBIT",
+      "editable": true,
+      "capital": false
+    },
+    "ring": {
+      "name": "The Support Ring",
+      "power": 10,
+      "editable": true
+    },
+    "editable": true
+  },
+  {
+    "name": "Gandalf",
+    "coordinates": {
+      "x": 40.1,
+      "y": 100
+    },
+    "age": 1000,
+    "type": "ELF",
+    "location": {
+      "name": "Middle Earth",
+      "area": 12000,
+      "population": 5000,
+      "governor": "ELF",
+      "capital": true,
+      "editable": true
+    },
+    "attackLevel": 100,
+    "defenseLevel": 300,
+    "editable": true,
+    "ring": {
+      "name": "The Wisdom Ring",
+      "power": 500,
+      "editable": true
+    }
+  }
+]

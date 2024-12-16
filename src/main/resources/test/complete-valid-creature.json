@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Frodo",
+    "coordinates": {
+      "x": 12.5,
+      "y": 100
+    },
+    "age": 50,
+    "type": "HOBBIT",
+    "location": {
+      "name": "Shire",
+      "area": 5000,
+      "population": 3000,
+      "establishmentDate": "2023-06-11T10:15:30Z",
+      "governor": "HUMAN",
+      "capital": true,
+      "populationDensity": 150,
+      "editable": true
+    },
+    "attackLevel": 5,
+    "defenseLevel": 10,
+    "editable": true,
+    "ring": {
+      "name": "The One Ring",
+      "power": 100,
+      "editable": true
+    }
+  },
+  {
+    "name": "Aragorn",
+    "coordinates": {
+      "x": 23.0,
+      "y": 150
+    },
+    "age": 87,
+    "type": "HUMAN",
+    "location": {
+      "name": "Gondor",
+      "area": 8000,
+      "population": 4000,
+      "governor": "HUMAN",
+      "capital": true,
+      "editable": true
+    },
+    "attackLevel": 15,
+    "defenseLevel": 50,
+    "editable": true,
+    "ring": {
+      "name": "The King Ring",
+      "power": 80,
+      "editable": true
+    }
+  }
+]

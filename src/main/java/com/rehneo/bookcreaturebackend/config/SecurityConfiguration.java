@@ -35,7 +35,7 @@ public class SecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(request -> {
                     var corsConfiguration = new CorsConfiguration();
-                    corsConfiguration.setAllowedOrigins(List.of("https://se.ifmo.ru"));
+                    corsConfiguration.setAllowedOrigins(List.of("http://localhost:5173"));
                     corsConfiguration.setAllowedMethods(List.of(
                             "GET", "POST", "PUT", "PATCH", "DELETE")
                     );

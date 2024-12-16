@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Frodo",
+    "coordinates": {
+      "x": 12.5,
+      "y": 100
+    },
+    "age": 50,
+    "type": "HOBBIT",
+    "location": {
+      "name": "Shire",
+      "area": 5000,
+      "population": 3000,
+      "establishmentDate": "2023-06-11T10:15:30Z",
+      "governor": "HUMAN",
+      "capital": true,
+      "populationDensity": 150
+    },
+    "attackLevel": 5,
+    "defenseLevel": 10,
+  }
+]

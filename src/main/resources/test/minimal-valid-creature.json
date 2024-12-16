@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Frodol",
+    "coordinates": {
+      "y": 100
+    },
+    "age": 50,
+    "location": {
+      "name": "Shire",
+      "area": 5000,
+      "population": 3000,
+      "governor": "HUMAN",
+      "editable": true,
+      "capital": true
+    },
+    "ring": {
+      "name": "The One Ring",
+      "power": 100,
+      "editable": true
+    },
+    "editable": true
+  }
+]

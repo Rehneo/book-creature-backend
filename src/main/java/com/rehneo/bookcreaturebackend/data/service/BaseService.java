@@ -1,4 +1,5 @@
 package com.rehneo.bookcreaturebackend.data.service;
+
 import com.rehneo.bookcreaturebackend.data.dto.read.AuditableDto;
 import com.rehneo.bookcreaturebackend.data.entity.AuditableEntity;
 import com.rehneo.bookcreaturebackend.data.search.SearchCriteriaDto;
@@ -14,6 +15,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 
@@ -25,8 +27,8 @@ public abstract class BaseService<
         TReadDto extends AuditableDto,
         TCreateDto,
         TMapper extends BaseMapper<T, K, TReadDto, TCreateDto>,
-        TRepository extends BaseRepository<T,K>>{
-    private final TRepository repository;
+        TRepository extends BaseRepository<T, K>> {
+    protected final TRepository repository;
     private final TMapper mapper;
     protected UserService userService;
     private final SearchMapper<T> searchMapper;
@@ -40,7 +42,7 @@ public abstract class BaseService<
 
 
     @Transactional
-    public TReadDto create(TCreateDto createDto){
+    public TReadDto create(TCreateDto createDto) {
         T entity = mapper.map(createDto);
         User user = userService.getCurrentUser();
         entity.setOwner(user);
@@ -51,57 +53,57 @@ public abstract class BaseService<
     }
 
     @Transactional
-    public void delete(K id){
+    public void delete(K id) {
         T entity = repository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Not Found: " + id)
         );
         User user = userService.getCurrentUser();
-        if(
+        if (
                 (user.getRole() == Role.ADMIN && entity.getEditable()) ||
-                user.getId() == entity.getOwner().getId()){
+                        user.getId() == entity.getOwner().getId()) {
             repository.delete(entity);
-        }else{
+        } else {
             throw new AccessDeniedException("not enough rights to delete this entity");
         }
     }
 
     @Transactional
-    public TReadDto update(K id, TCreateDto createDto){
+    public TReadDto update(K id, TCreateDto createDto) {
         T entity = repository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Not Found: " + id)
         );
         User user = userService.getCurrentUser();
-        if(
+        if (
                 (user.getRole() == Role.ADMIN && entity.getEditable()) ||
-                 user.getId() == entity.getOwner().getId()){
+                        user.getId() == entity.getOwner().getId()) {
             mapper.update(entity, createDto);
             entity.setUpdatedBy(userService.getCurrentUser());
             entity.setUpdatedAt(ZonedDateTime.now());
             preSave(entity, user);
             repository.save(entity);
             return mapper.map(entity);
-        }else{
+        } else {
             throw new AccessDeniedException("not enough rights to update this entity");
         }
     }
 
 
-    public Page<TReadDto> findAll(Pageable pageable){
+    public Page<TReadDto> findAll(Pageable pageable) {
         Page<T> entities = repository.findAll(pageable);
         return entities.map(mapper::map);
     }
 
-    public Page<TReadDto> search(SearchCriteriaDto dto, Pageable pageable){
-        Page<T> entities = repository.findAll(searchMapper.map(dto),pageable);
+    public Page<TReadDto> search(SearchCriteriaDto dto, Pageable pageable) {
+        Page<T> entities = repository.findAll(searchMapper.map(dto), pageable);
         return entities.map(mapper::map);
     }
 
-    public Page<TReadDto> findAllByOwner(Pageable pageable){
+    public Page<TReadDto> findAllByOwner(Pageable pageable) {
         Page<T> entities = repository.findAllByOwnerId(pageable, userService.getCurrentUser().getId());
         return entities.map(mapper::map);
     }
 
-    public Page<TReadDto> findAllByOwner(Pageable pageable, int id){
+    public Page<TReadDto> findAllByOwner(Pageable pageable, int id) {
         Page<T> entities = repository.findAllByOwnerId(pageable, id);
         return entities.map(mapper::map);
     }

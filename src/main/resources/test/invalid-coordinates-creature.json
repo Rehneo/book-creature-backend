@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Frodo",
+    "coordinates": {
+      "x": "invalid_value"
+    },
+    "age": 50,
+    "location": {
+      "name": "Shire",
+      "area": 5000,
+      "population": 3000,
+      "governor": "HUMAN",
+      "capital": true
+    },
+    "ring": {
+      "name": "The One Ring",
+      "power": 100
+    }
+  }
+]

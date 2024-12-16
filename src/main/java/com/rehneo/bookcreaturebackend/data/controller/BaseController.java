@@ -115,4 +115,10 @@ public abstract class BaseController<
         Response response = new Response(ex.getMessage());
         return ResponseEntity.status(403).body(response);
     }
+
+    @ExceptionHandler({ResourceAlreadyExistsException.class})
+    public ResponseEntity<Response> alreadyExists(Exception ex){
+        Response response = new Response(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+    }
 }

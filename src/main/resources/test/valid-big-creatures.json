@@ -1,0 +1,324 @@
+[
+  {
+    "name": "Aragorn",
+    "coordinates": {
+      "y": 10,
+      "x": 100.0
+    },
+    "age": 87,
+    "location": {
+      "name": "Gondor",
+      "area": 1000,
+      "population": 50000,
+      "governor": "HUMAN",
+      "capital": true,
+      "editable": false
+    },
+    "ring": {
+      "name": "Ring of Power",
+      "power": 100,
+      "editable": true
+    },
+    "editable": true
+  },
+  {
+    "name": "Legolas",
+    "coordinates": {
+      "y": 20,
+      "x": 200.0
+    },
+    "age": 2931,
+    "location": {
+      "name": "Mirkwood",
+      "area": 3000,
+      "population": 20000,
+      "governor": "ELF",
+      "capital": false,
+      "editable": true
+    },
+    "ring": {
+      "name": "Ring of Nature",
+      "power": 85,
+      "editable": false
+    },
+    "editable": false
+  },
+  {
+    "name": "Frodo",
+    "coordinates": {
+      "y": 5
+    },
+    "age": 33,
+    "location": {
+      "name": "The Shire",
+      "area": 1500,
+      "population": 1000,
+      "governor": "HOBBIT",
+      "capital": true,
+      "editable": true
+    },
+    "ring": {
+      "name": "One Ring",
+      "power": 90,
+      "editable": true
+    },
+    "editable": true
+  },
+  {
+    "name": "Samwise",
+    "coordinates": {
+      "y": 7,
+      "x": -20.5
+    },
+    "age": 38,
+    "location": {
+      "name": "Hobbiton",
+      "area": 1000,
+      "population": 500,
+      "governor": "HOBBIT",
+      "capital": false,
+      "editable": false
+    },
+    "ring": {
+      "name": "Friendship Ring",
+      "power": 70,
+      "editable": false
+    },
+    "editable": true
+  },
+  {
+    "name": "Gimli",
+    "coordinates": {
+      "y": 15
+    },
+    "age": 139,
+    "location": {
+      "name": "Erebor",
+      "area": 4000,
+      "population": 12000,
+      "governor": "HUMAN",
+      "capital": false,
+      "editable": true
+    },
+    "ring": {
+      "name": "Ring of Fire",
+      "power": 95,
+      "editable": true
+    },
+    "editable": false
+  },
+  {
+    "name": "Boromir",
+    "coordinates": {
+      "y": 25,
+      "x": 50.0
+    },
+    "age": 41,
+    "location": {
+      "name": "Minas Tirith",
+      "area": 3500,
+      "population": 30000,
+      "governor": "HUMAN",
+      "capital": true,
+      "editable": false
+    },
+    "ring": {
+      "name": "Shield Ring",
+      "power": 80,
+      "editable": false
+    },
+    "editable": true
+  },
+  {
+    "name": "Gandalf",
+    "coordinates": {
+      "y": 50,
+      "x": 300.0
+    },
+    "age": 2019,
+    "location": {
+      "name": "Middle-earth",
+      "area": 5000,
+      "population": 100000,
+      "governor": "HUMAN",
+      "capital": false,
+      "editable": true
+    },
+    "ring": {
+      "name": "Narya",
+      "power": 120,
+      "editable": true
+    },
+    "editable": true
+  },
+  {
+    "name": "Arwen",
+    "coordinates": {
+      "y": 18
+    },
+    "age": 2901,
+    "location": {
+      "name": "Rivendell",
+      "area": 2800,
+      "population": 20000,
+      "governor": "ELF",
+      "capital": false,
+      "editable": false
+    },
+    "ring": {
+      "name": "Hope Ring",
+      "power": 75,
+      "editable": false
+    },
+    "editable": false
+  },
+  {
+    "name": "Bilbo",
+    "coordinates": {
+      "y": 8
+    },
+    "age": 111,
+    "location": {
+      "name": "Bag End",
+      "area": 1200,
+      "population": 600,
+      "governor": "HOBBIT",
+      "capital": true,
+      "editable": true
+    },
+    "ring": {
+      "name": "Ring of Invisibility",
+      "power": 60,
+      "editable": true
+    },
+    "editable": true
+  },
+  {
+    "name": "Thranduil",
+    "coordinates": {
+      "y": 30
+    },
+    "age": 5000,
+    "location": {
+      "name": "Woodland Realm",
+      "area": 3200,
+      "population": 25000,
+      "governor": "ELF",
+      "capital": true,
+      "editable": false
+    },
+    "ring": {
+      "name": "Ring of Kings",
+      "power": 110,
+      "editable": false
+    },
+    "editable": false
+  },
+  {
+    "name": "Sauron",
+    "coordinates": {
+      "y": 100,
+      "x": 1000.0
+    },
+    "age": 3000,
+    "location": {
+      "name": "Mordor",
+      "area": 10000,
+      "population": 80000,
+      "governor": "HUMAN",
+      "capital": true,
+      "editable": false
+    },
+    "ring": {
+      "name": "The One Ring",
+      "power": 999,
+      "editable": true
+    },
+    "editable": true
+  },
+  {
+    "name": "Elrond",
+    "coordinates": {
+      "y": 35
+    },
+    "age": 5000,
+    "location": {
+      "name": "Rivendell",
+      "area": 2800,
+      "population": 25000,
+      "governor": "ELF",
+      "capital": true,
+      "editable": false
+    },
+    "ring": {
+      "name": "Vilya",
+      "power": 95,
+      "editable": false
+    },
+    "editable": true
+  },
+  {
+    "name": "Eomer",
+    "coordinates": {
+      "y": 60
+    },
+    "age": 40,
+    "location": {
+      "name": "Rohan",
+      "area": 7000,
+      "population": 40000,
+      "governor": "HUMAN",
+      "capital": true,
+      "editable": false
+    },
+    "ring": {
+      "name": "Ring of Riders",
+      "power": 80,
+      "editable": true
+    },
+    "editable": true
+  },
+  {
+    "name": "Galadriel",
+    "coordinates": {
+      "y": 45
+    },
+    "age": 7000,
+    "location": {
+      "name": "Lothlorien",
+      "area": 3100,
+      "population": 15000,
+      "governor": "ELF",
+      "capital": false,
+      "editable": false
+    },
+    "ring": {
+      "name": "Nenya",
+      "power": 100,
+      "editable": true
+    },
+    "editable": false
+  },
+  {
+    "name": "Saruman",
+    "coordinates": {
+      "y": 70,
+      "x": -500.0
+    },
+    "age": 2000,
+    "location": {
+      "name": "Isengard",
+      "area": 5000,
+      "population": 15000,
+      "governor": "HUMAN",
+      "capital": false,
+      "editable": false
+    },
+    "ring": {
+      "name": "Ring of Knowledge",
+      "power": 90,
+      "editable": false
+    },
+    "editable": true
+  }
+]

@@ -5,16 +5,24 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface BookCreatureRepository extends BaseRepository<BookCreature, Long> {
 
     Page<BookCreature> findByIdIn(Pageable pageable, Long... ids);
+
+    @Query(value = "select b.id from BookCreature b where b.name = :name")
+    Optional<Long> findIdByName(String name);
+
 
     @Query(value = "select avg_attack_level()", nativeQuery = true)
     double avgAttackLevel();
 
     @Query(value = "select exchange_rings(:id1, :id2)", nativeQuery = true)
     void exchangeRings(long id1, long id2);
+
+    boolean existsByName(String name);
 
 
     @Query(value = "select * from book_creatures where id in (select creature_ids_by_name_containing(:name))", nativeQuery = true)

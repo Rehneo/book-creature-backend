@@ -1,0 +1,135 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BookCreatures",
+  "type": "array",
+  "minItems": 1,
+  "maxItems": 1024,
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "name",
+      "coordinates",
+      "age",
+      "location",
+      "ring",
+      "editable"
+    ],
+    "properties": {
+      "name": {
+        "type": "string",
+        "minLength": 1
+      },
+      "coordinates": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "y"
+        ],
+        "properties": {
+          "x": {
+            "type": "number",
+            "minimum": -3.4028235E38,
+            "maximum": 3.4028235E38
+          },
+          "y": {
+            "type": "integer"
+          }
+        }
+      },
+      "age": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "HUMAN",
+          "ELF",
+          "HOBBIT"
+        ]
+      },
+      "location": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "area",
+          "population",
+          "governor",
+          "capital",
+          "editable"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "area": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "population": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "establishmentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "governor": {
+            "type": "string",
+            "enum": [
+              "HUMAN",
+              "ELF",
+              "HOBBIT"
+            ]
+          },
+          "capital": {
+            "type": "boolean"
+          },
+          "populationDensity": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "editable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "attackLevel": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "defenseLevel": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "editable": {
+        "type": "boolean"
+      },
+      "ring": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "power",
+          "editable"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "power": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "editable": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}
