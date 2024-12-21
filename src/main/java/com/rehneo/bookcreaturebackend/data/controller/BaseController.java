@@ -4,6 +4,7 @@ import com.rehneo.bookcreaturebackend.data.entity.AuditableEntity;
 import com.rehneo.bookcreaturebackend.data.search.SearchCriteriaDto;
 import com.rehneo.bookcreaturebackend.data.service.BaseService;
 import com.rehneo.bookcreaturebackend.error.*;
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.hibernate.query.SemanticException;
@@ -96,6 +97,7 @@ public abstract class BaseController<
 
     @ExceptionHandler({
             MethodArgumentNotValidException.class,
+            ConstraintViolationException.class,
             BadRequestException.class,
             IllegalArgumentException.class,
             SemanticException.class})
@@ -116,8 +118,8 @@ public abstract class BaseController<
         return ResponseEntity.status(403).body(response);
     }
 
-    @ExceptionHandler({ResourceAlreadyExistsException.class})
-    public ResponseEntity<Response> alreadyExists(Exception ex){
+    @ExceptionHandler({ResourceAlreadyExistsException.class, DeleteConflictException.class})
+    public ResponseEntity<Response> conflict(Exception ex){
         Response response = new Response(ex.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }

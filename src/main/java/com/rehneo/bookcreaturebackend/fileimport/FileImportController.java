@@ -29,8 +29,14 @@ public class FileImportController {
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
-    public ResponseEntity<FileImportDto> create(@RequestParam("file") MultipartFile file) throws IOException {
-        FileImportDto fileImportDto = fileImportService.importFile(file);
+    public ResponseEntity<FileImportDto> importFile(@RequestParam("file") MultipartFile file) throws IOException {
+        FileImportDto fileImportDto;
+        try {
+            fileImportDto = fileImportService.importFile(file);
+        }catch (Exception e){
+            fileImportService.saveFailedImport();
+            throw e;
+        }
         return ResponseEntity.ok(fileImportDto);
     }
 

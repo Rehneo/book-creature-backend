@@ -14,6 +14,7 @@ import com.rehneo.bookcreaturebackend.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
@@ -29,7 +30,7 @@ public abstract class BaseService<
         TMapper extends BaseMapper<T, K, TReadDto, TCreateDto>,
         TRepository extends BaseRepository<T, K>> {
     protected final TRepository repository;
-    private final TMapper mapper;
+    protected final TMapper mapper;
     protected UserService userService;
     private final SearchMapper<T> searchMapper;
 
@@ -47,12 +48,11 @@ public abstract class BaseService<
         User user = userService.getCurrentUser();
         entity.setOwner(user);
         entity.setCreatedAt(ZonedDateTime.now());
-        preSave(entity, user);
         repository.save(entity);
         return mapper.map(entity);
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public void delete(K id) {
         T entity = repository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Not Found: " + id)
@@ -79,7 +79,6 @@ public abstract class BaseService<
             mapper.update(entity, createDto);
             entity.setUpdatedBy(userService.getCurrentUser());
             entity.setUpdatedAt(ZonedDateTime.now());
-            preSave(entity, user);
             repository.save(entity);
             return mapper.map(entity);
         } else {
@@ -108,6 +107,4 @@ public abstract class BaseService<
         return entities.map(mapper::map);
     }
 
-    protected void preSave(T entity, User user) {
-    }
 }

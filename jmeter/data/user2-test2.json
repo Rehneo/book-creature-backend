@@ -1,0 +1,154 @@
+[
+  {
+    "name": "Name 11",
+    "coordinates": {
+      "y": 10,
+      "x": 100.0
+    },
+    "age": 87,
+    "location": {
+      "name": "Location 11",
+      "area": 1000,
+      "population": 50000,
+      "governor": "HUMAN",
+      "capital": true,
+      "editable": false
+    },
+    "ring": {
+      "name": "Ring 11",
+      "power": 100,
+      "editable": true
+    },
+    "editable": true
+  },
+  {
+    "name": "Name 12",
+    "coordinates": {
+      "y": 20,
+      "x": 200.0
+    },
+    "age": 2931,
+    "location": {
+      "name": "Location 12",
+      "area": 3000,
+      "population": 20000,
+      "governor": "ELF",
+      "capital": false,
+      "editable": true
+    },
+    "ring": {
+      "name": "Ring 12",
+      "power": 85,
+      "editable": false
+    },
+    "editable": false
+  },
+  {
+    "name": "Name 13",
+    "coordinates": {
+      "y": 5
+    },
+    "age": 33,
+    "location": {
+      "name": "Location 13",
+      "area": 1500,
+      "population": 1000,
+      "governor": "HOBBIT",
+      "capital": true,
+      "editable": true
+    },
+    "ring": {
+      "name": "Ring 13",
+      "power": 90,
+      "editable": true
+    },
+    "editable": true
+  },
+  {
+    "name": "Name 14",
+    "coordinates": {
+      "y": 7,
+      "x": -20.5
+    },
+    "age": 38,
+    "location": {
+      "name": "Location 14",
+      "area": 1000,
+      "population": 500,
+      "governor": "HOBBIT",
+      "capital": false,
+      "editable": false
+    },
+    "ring": {
+      "name": "Ring 14",
+      "power": 70,
+      "editable": false
+    },
+    "editable": true
+  },
+  {
+    "name": "Same Name",
+    "coordinates": {
+      "y": 15
+    },
+    "age": 139,
+    "location": {
+      "name": "Location 15",
+      "area": 4000,
+      "population": 12000,
+      "governor": "HUMAN",
+      "capital": false,
+      "editable": true
+    },
+    "ring": {
+      "name": "Ring 15",
+      "power": 95,
+      "editable": true
+    },
+    "editable": false
+  },
+  {
+    "name": "Name 16",
+    "coordinates": {
+      "y": 25,
+      "x": 50.0
+    },
+    "age": 41,
+    "location": {
+      "name": "Location 16",
+      "area": 3500,
+      "population": 30000,
+      "governor": "HUMAN",
+      "capital": true,
+      "editable": false
+    },
+    "ring": {
+      "name": "Ring 16",
+      "power": 80,
+      "editable": false
+    },
+    "editable": true
+  },
+  {
+    "name": "Name 17",
+    "coordinates": {
+      "y": 50,
+      "x": 300.0
+    },
+    "age": 2019,
+    "location": {
+      "name": "Location 17",
+      "area": 5000,
+      "population": 100000,
+      "governor": "HUMAN",
+      "capital": false,
+      "editable": true
+    },
+    "ring": {
+      "name": "Ring 17",
+      "power": 120,
+      "editable": true
+    },
+    "editable": true
+  }
+]

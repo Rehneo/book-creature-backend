@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FileImportRepository extends JpaRepository<FileImport, Integer> {
 
-    Page<FileImport> findAllByOrderByCreatedAtDesc(Pageable pageable);
+    Page<FileImport> findAllByUser(User user, Pageable pageable);
 
-    Page<FileImport> findAllByUserOrderByCreatedAtDesc(User user, Pageable pageable);
 }
