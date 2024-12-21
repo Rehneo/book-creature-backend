@@ -29,7 +29,6 @@ public class FileImport {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-
     @Enumerated(EnumType.STRING)
     @JdbcType(PostgreSQLEnumJdbcType.class)
     @ColumnTransformer(write = "?::file_import_status")

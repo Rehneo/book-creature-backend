@@ -82,7 +82,6 @@ public class FileImportService {
         return fileImportMapper.map(fileImport);
     }
 
-
     private List<BookCreature> processFile(MultipartFile file) throws IOException {
         if (file.isEmpty()) {
             throw new FileIsEmptyException("File is empty");

@@ -24,32 +24,30 @@ import java.io.IOException;
 @RequestMapping(value = "/api/v1/book-creatures/file-imports", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class FileImportController {
-    private final FileImportService fileImportService;
+    private final FileImportService service;
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public ResponseEntity<FileImportDto> importFile(@RequestParam("file") MultipartFile file) throws IOException {
-        FileImportDto fileImportDto;
+        FileImportDto importDto;
         try {
-            fileImportDto = fileImportService.importFile(file);
-        }catch (Exception e){
-            fileImportService.saveFailedImport();
+            importDto = service.importFile(file);
+        } catch (Exception e) {
+            service.saveFailedImport();
             throw e;
         }
-        return ResponseEntity.ok(fileImportDto);
+        return ResponseEntity.ok().body(importDto);
     }
-
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public ResponseEntity<Page<FileImportDto>> findAll(Pageable pageable) {
-        Page<FileImportDto> fileImports = fileImportService.findAll(pageable);
+        Page<FileImportDto> fileImports = service.findAll(pageable);
         return ResponseEntity.ok()
                 .header("X-Total-Count",
-                String.valueOf(fileImports.getTotalElements())).body(fileImports);
+                        String.valueOf(fileImports.getTotalElements())).body(fileImports);
     }
-
 
     @ExceptionHandler({FileIsEmptyException.class, BadFileExtensionException.class, JsonParseException.class})
     public ResponseEntity<Response> badRequest(Exception ex) {

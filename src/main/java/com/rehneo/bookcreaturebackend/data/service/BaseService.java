@@ -52,7 +52,7 @@ public abstract class BaseService<
         return mapper.map(entity);
     }
 
-    @Transactional(isolation = Isolation.REPEATABLE_READ)
+    @Transactional
     public void delete(K id) {
         T entity = repository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Not Found: " + id)

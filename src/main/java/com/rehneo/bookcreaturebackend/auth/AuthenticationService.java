@@ -1,4 +1,5 @@
 package com.rehneo.bookcreaturebackend.auth;
+
 import com.rehneo.bookcreaturebackend.security.JwtService;
 import com.rehneo.bookcreaturebackend.user.*;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -21,15 +23,14 @@ public class AuthenticationService {
     private final UserMapper userMapper;
     private final UserService userService;
 
-
-    @Transactional
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public AuthenticationResponse signUp(SignUpRequest signUpRequest) {
         User user = User.builder()
                 .username(signUpRequest.getUsername())
                 .password(passwordEncoder.encode(signUpRequest.getPassword()))
                 .role(Role.USER)
                 .build();
-        if(userRepository.existsByUsername(signUpRequest.getUsername())) {
+        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             throw new UserAlreadyExistsException("User with username " + signUpRequest.getUsername() + " already exists");
         }
         userRepository.save(user);
